@@ -5,7 +5,7 @@
 # pull request on our GitHub repository:
 #     https://github.com/kaczmarj/neurodocker
 #
-# Timestamp: 2017-08-10 04:35:59
+# Timestamp: 2017-08-11 21:52:02
 
 FROM neurodebian:stretch-non-free
 
@@ -65,7 +65,7 @@ RUN echo "Downloading Miniconda installer ..." \
 # Create conda environment
 #-------------------------
 RUN conda create -y -q --name neuro python=3.5 \
-    	jupyter jupyterlab pandas matplotlib scikit-learn seaborn altair traitsui apptools configobj \
+    	jupyter jupyterlab pandas matplotlib scikit-learn seaborn altair traitsui apptools configobj reprozip reprounzip \
     && conda clean -tipsy \
     && /bin/bash -c "source activate neuro \
     	&& pip install -q --no-cache-dir \
@@ -77,7 +77,7 @@ ENV PATH=/opt/conda/envs/neuro/bin:$PATH
 RUN bash -c "source activate neuro && conda install -c menpo mayavi" 
 
 # User-defined instruction
-RUN bash -c "source activate neuro && pip install --pre --upgrade ipywidgets ipyvolume " 
+RUN bash -c "source activate neuro && pip install --pre --upgrade ipywidgets pythreejs " 
 
 # User-defined instruction
 RUN bash -c "source activate neuro && pip install  --upgrade https://github.com/maartenbreddels/ipyvolume/archive/master.zip && jupyter nbextension install --py --symlink --user ipyvolume && jupyter nbextension enable ipyvolume --user --py" 
